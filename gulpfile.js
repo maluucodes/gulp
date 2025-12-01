@@ -30,31 +30,12 @@ function compilaSass() {
 }
 
 
-function funcaoPadrao(callback) {
-    console.log("executando via gulp")
-    callback()
-}
 
-function dizOi(callback) {
-    console.log("oi, gulp")
-    dizTchau()
-    callback()
-}
 
-function dizTchau() {
-    console.log("tchau, gulp")
-}
 
-exports.dizOi = dizOi
-
-exports.default = gulp.parallel(funcaoPadrao, dizOi)
-
-exports.sass = compilaSass
-
-exports.watch = function() {
+exports.default = function() {
     gulp.watch('./source/styles/*.scss' , {ignoreInitial: false} , gulp.series(compilaSass))
+    gulp.watch('./source/images/*' , {ignoreInitial: false} , gulp.series(comprimeImagem))
+    gulp.watch('../source/scripts/*.js' , {ignoreInitial: false} , gulp.series(comprimeJavaScript))
 }
 
-exports.javascript = comprimeJavaScript
-
-exports.images = comprimeImagem
